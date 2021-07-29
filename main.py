@@ -39,6 +39,10 @@ while game_on:
     for n in range(len(p1.player)):
         if ball.distance(p1.player[n]) < 18 or ball.distance(p2.player[n]) < 18:
             ball.horizontal_bounce()
+            for _ in range(10):
+                ball.move()
+                screen.update()
+                time.sleep(0.016666667)
             break
     if ball.escaped():
         new_game()

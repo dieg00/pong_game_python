@@ -4,6 +4,7 @@ X_LEFT_POSITION = -390
 X_RIGHT_POSITION = 390
 SPEED = 50
 
+
 class Player:
     def __init__(self):
         self.player = []
