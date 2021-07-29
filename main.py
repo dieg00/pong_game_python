@@ -22,12 +22,28 @@ onkeypress(fun=p2.down, key="Down")
 screen.listen()
 ball = Ball()
 
+
+def new_game():
+    ball.new_game()
+    p1.reset()
+    p2.reset()
+    time.sleep(3)
+
+
 game_on = True
 
 while game_on:
     screen.update()
     ball.move()
-    time.sleep(0.01)
+    ball.check_bounce()
+    for n in range(len(p1.player)):
+        if ball.distance(p1.player[n]) < 18 or ball.distance(p2.player[n]) < 18:
+            ball.horizontal_bounce()
+            break
+    if ball.escaped():
+        new_game()
+
+    time.sleep(0.016666667)
 
 
 
