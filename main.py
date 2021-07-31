@@ -1,4 +1,4 @@
-from turtle import Screen, onkeypress
+from turtle import Screen, onkeypress, onkey
 from table import Table
 from player import Player
 from ball import Ball
@@ -10,7 +10,7 @@ screen = Screen()
 screen.bgcolor("black")
 screen.setup(height=700, width=900)
 screen.tracer(0)
-
+screen.title("Pong")
 table = Table()
 p1 = Player()
 p1.left()
@@ -37,14 +37,15 @@ def finish_game():
 
 def pause_game():
     global stopped
-    if stopped:
-        stopped = False
-    else:
-        stopped = True
+    stopped = True
+    # if stopped:
+    #     stopped = False
+    # else:
+    #     stopped = True
 
 
 onkeypress(fun=finish_game, key="Escape")
-onkeypress(fun=pause_game, key="space")
+onkey(fun=pause_game, key="space")
 
 screen.listen()
 ball = Ball()
@@ -61,12 +62,16 @@ def new_game():
 
 
 while game_on:
+    onkey(fun=pause_game, key="space")
+    screen.listen()
+    print(stopped)
     screen.update()
     ball.move()
     ball.check_bounce()
     for n in range(len(p1.player)):
         if ball.distance(p1.player[n]) < 18 or ball.distance(p2.player[n]) < 18:
             ball.horizontal_bounce()
+            ball.increase_speed(1.1)
             for _ in range(10):
                 ball.move()
                 ball.check_bounce()
@@ -82,5 +87,8 @@ while game_on:
 
     time.sleep(0.016666667)
     while stopped:
-        print("We are stopped")
-        time.sleep(1)
+        # onkey(fun=pause_game, key="space")
+        # screen.listen()
+        # time.sleep(0.5)
+        screen.textinput(title="Continue?", prompt="Press Enter to continue playing.")
+        stopped = False

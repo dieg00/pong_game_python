@@ -24,12 +24,14 @@ class Player:
             block.setx(X_RIGHT_POSITION)
 
     def down(self):
-        for block in self.player:
-            block.sety(block.ycor()-SPEED)
+        if self.player[1].ycor() > -330:
+            for block in self.player:
+                block.sety(block.ycor()-SPEED)
 
     def up(self):
-        for block in self.player:
-            block.sety(block.ycor() + SPEED)
+        if self.player[1].ycor() < 330:
+            for block in self.player:
+                block.sety(block.ycor() + SPEED)
 
     def reset(self):
         for n in range(len(self.player)):
