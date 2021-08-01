@@ -8,4 +8,3 @@ class Table():
             block.penup()
             block.color("white")
             block.setpos(0, POSITIONS[n])
-
